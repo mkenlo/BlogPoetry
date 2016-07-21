@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Blog Poetry</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        <link rel="shortcut icon" type="image/png" href="favicon.ico"/>        
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+    
+  
+    <div class="container">
+      <!-- page header -->
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center"><a href="/blog">My Best Poetries</a> <br> <small>by mkenlo</small> </h1>         
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <span class="text-rigth">
+            
+            {% if username %}
+              <span> Welcome <label>{{username}}</label> </span> | <a href="/logout">Logout</a>
+            {% else %}  
+              <a href="/signup">Sign up</a> | <a href="/login">Login</a><span/>
+            {% endif %}  
+        </div>
+      </div> 
+      <hr>
+      <!-- end of page header-->
+      <!-- page content -->
+      {% block content %}
+
+      {% endblock %}
+      <!-- end page content -->
+      <hr>
+      <div class="row">
+        <footer>
+          <p>&copy; mkenlo 2016 </p>
+        </footer>
+      </div>
+    </div> <!-- /container -->   
+    </body>
+</html>

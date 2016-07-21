@@ -1,0 +1,18 @@
+{% extends "index.html" %} 
+
+{% block content %}
+ 
+ <div class="row">   
+  <div class="col-md-12">
+      <article>
+        <h4>{{post.title}} <small>{{post.created}}</small></h4>
+        <p>{{post.content}} </p>
+      </article>
+    </div>
+ </div>
+<div class="row">
+    <div class="col-md-4">
+      <h4><a href="/blog">Return to Home Page </a></h4>
+    </div>
+</div>
+ {% endblock %}     

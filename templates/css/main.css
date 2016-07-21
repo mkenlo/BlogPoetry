@@ -1,0 +1,44 @@
+
+
+/* ==========================================================================
+    custom styles
+   ========================================================================== */
+
+body {
+	padding-top: 10px;
+	padding-bottom: 20px;
+    font-family: 'Open sans', sans-serif;
+    color:#2d3c49;
+}
+
+hr {
+	color:#2d3c49;
+
+}
+
+.name-class {
+	letter-spacing: 2px;
+	
+}
+
+.featured-header {
+	color:#7d97ad;
+}
+
+.have-error{
+	color:#FF372C;
+}
+
+footer {
+	margin-top: 50px;
+	padding:20px;
+	text-align: center;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+{% extends "index.html" %} 
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+      <h3 class="featured-header">Recent Posts</h3>
+    </div>
+</div> 
+<div class="row">
+    {% for post in posts %}
+      <div class="col-md-4">
+          <article>
+            <h4><a href="/blog/{{post.key.id()}}">{{post.title}} </a><small>{{post.created}}</small></h4>
+            <p>{{post.content}} </p>
+          </article>
+        </div>
+    {% endfor %}
+    
+    {% if error %}
+    <p class="alert alert-info" role="alert">{{error}}</p>
+    {% endif %}
+</div>       
+{% if username %}
+<div class="row">
+    <div class="col-md-4">
+      <h4><a href="/blog/add">Add an article </a></h4>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col-md-4">
+      <h4><a href="/login">Login to write a post </a></h4>
+    </div>
+</div>
+{% endif %}
+ {% endblock %}     

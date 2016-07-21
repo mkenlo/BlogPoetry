@@ -1,0 +1,36 @@
+{% extends "index.html" %} 
+
+{% block content %}
+<div class="row">
+	<div class="col-md-6">
+		<h2>Sign up</h2>
+		{% if info %}
+		<p class="alert alert-warning" role="alert">{{info}}</p>
+		{% endif %}
+		<form method="post" action="/signup" >
+
+			<label>UserName
+		      <input type="text" name="username" required autocomplete='first name' value="{{user_name}}" class="form-control" placeholder="johnsue">		      
+		    </label>
+		    <p class="have-error">{{used_username}}</p>
+		   		    
+		    <label>Email Address
+		      <input type="email" name="email_address"required value="{{email_address}}" autocomplete='email' class="form-control" placeholder="johnsue@domain.com">		      
+		    </label>
+		    <p class="have-error">{{error_email}}</p>
+		    
+		    <label>Password
+		      <input type="password" name="password" required class="form-control">		    
+		    </label>
+		     <p class="have-error">{{error_password}}</p>
+		    <label>Confirm your Password
+		      <input type="password" name="password_confirm" required class="form-control">		      
+		    </label>
+		    <p class="have-error">{{error_verify}}</p>
+		    <label>
+		    	<input id="submit" type="submit" class="btn btn-primary form-control">
+			</label>
+		</form>
+	</div>
+</div>
+{% endblock %}
