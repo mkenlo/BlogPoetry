@@ -1,0 +1,31 @@
+{% extends "index.html" %} 
+
+{% block content %}
+<div class="row">
+	<div class="col-md-9">
+		<h4>Edit an article</h4>
+
+		{% if error %}
+		<p class="alert alert-warning" role="alert">{{error}}</p>
+		{% endif %}
+		
+		<form method="post" action="/blog/edit/{{post.key.id()}}" >
+			<input type="hidden" name="post-id" required  value="{{post.key.id()}}" >	
+			<label>Title
+
+		      <input type="text" name="post-title" required  class="form-control" value="{{post.title}}" >
+		    </label>
+		   	<br>	    
+		    <label>Content
+		      <textarea class="form-control"  name="content" required rows="10" cols="90">{{post.content}}</textarea>
+		   	 </label>
+		    <br>
+		    <label>
+		    	<input id="submit" type="submit" class="btn btn-primary "> 
+		    	<a href="/blog/{{post.key.id()}}" role="button" class="btn btn-warning">Cancel</a>
+		    	<a href="/blog/delete/{{post.key.id()}}" role="button" class="btn btn-danger">Delete post</a>
+			</label>
+		</form>
+	</div>
+</div>
+{% endblock %}

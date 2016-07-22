@@ -8,14 +8,30 @@
 </div> 
 <div class="row">
     {% for post in posts %}
-      <div class="col-md-4">
+      <div class="col-md-6">
           <article>
             <h4><a href="/blog/{{post.key.id()}}">{{post.title}} </a><small>{{post.created}}</small></h4>
             <p>{{post.content}} </p>
+           
           </article>
+          <section class="post-social"> 
+            <div class="social"> <span class="glyphicon glyphicon-user"></span>&nbsp;              
+              <label>    {{post.author.id()}}        </label>
+            </div>
+            <div class="social"> <span class="glyphicon glyphicon-heart"></span>&nbsp;
+              
+              <label>    {{post.likes}}        </label>
+            </div>
+              {% if post.author.id() != username%}
+                <div class="social"> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <a href="/blog/like/{{post.key.id()}}">Like</a></div>
+                <div class="social"> <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<a href="/blog/comment/{{post.key.id()}}">Comment</a></div>
+              {% endif %}  
+          </section>
         </div>
     {% endfor %}
-    
+    {% if not posts%}
+    <p> Not yet posts...</p>
+    {% endif %}
     {% if error %}
     <p class="alert alert-info" role="alert">{{error}}</p>
     {% endif %}

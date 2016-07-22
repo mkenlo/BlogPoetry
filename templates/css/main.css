@@ -28,7 +28,13 @@ hr {
 .have-error{
 	color:#FF372C;
 }
-
+.post-social div{
+	margin-right:20px;
+}
+.social{
+	display:inline-flex;
+	padding: 10px;
+}
 footer {
 	margin-top: 50px;
 	padding:20px;

@@ -1,0 +1,36 @@
+{% extends "index.html" %} 
+
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+	  <article>
+	    <h4>{{post.title}} <small>{{post.created}}</small></h4>
+	    <p>{{post.content}} </p>
+	  </article>
+	</div>
+
+</div>
+<br>
+<div class="row">
+	<div class="col-md-9">
+		<h4>Comment Post</h4>
+
+		{% if error %}
+		<p class="alert alert-warning" role="alert">{{error}}</p>
+		{% endif %}
+		
+		<form method="post" action="/blog/comment/{{post.key.id()}}" >
+				
+				    
+		    <label>
+		      <textarea class="form-control"  name="content" required rows="10" cols="90"></textarea>
+		   	 </label>
+		    <br>
+		    <label>
+		    	<input id="submit" type="submit" class="btn btn-primary "> 
+		    	<a href="/blog/{{post.key.id()}}" role="button" class="btn btn-warning">Cancel</a>
+			</label>
+		</form>
+	</div>
+</div>
+{% endblock %}

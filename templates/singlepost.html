@@ -5,14 +5,46 @@
  <div class="row">   
   <div class="col-md-12">
       <article>
-        <h4>{{post.title}} <small>{{post.created}}</small></h4>
-        <p>{{post.content}} </p>
+        <h4>{{post.title}} </h4>
+        <p>{{post.content}} </p> 
       </article>
+      <hr>
+      <span>
+        <p> Posted by <b>{{post.author.id()}}</b> <small>{{post.created}}</small></p>
+      </span>
+      <br>
+      {%if post.author.id() == username %}
+        <a href="/blog/edit/{{post.key.id()}}" role="button" class="btn btn-info">Edit this article</a>
+      {% elif username %}  
+        <a href="/blog/add" role="button" class="btn btn-success">Write a post</a>
+      {% else %}  
+        <a href="/login" >Login to write a post</a>
+      {% endif %}
     </div>
+ </div>
+ <br>
+ <div class ="row">
+  <h4>So much comments...</h4>
+  <div class="col-md-12">
+    {% for comment in post_comments%}
+
+      <h5>{{comment.author.id()}}<small> said:</small> </h5>
+      <blockquote>
+        <p>{{comment.comment}}</p>
+      </blockquote>
+    {% endfor %}
+    {% if not post_comments%}
+    <p> Not yet comments for this posts</p>
+    {% endif %}
+  </div>
+
  </div>
 <div class="row">
     <div class="col-md-4">
-      <h4><a href="/blog">Return to Home Page </a></h4>
+      {% if username != post.author.id()%}
+      <a href="/blog/comment/{{post.key.id()}}">Add a comment  </a>&nbsp;|
+      {% endif %}
+       &nbsp; <a href="/blog">Return to Home Page </a>
     </div>
 </div>
  {% endblock %}     
