@@ -1,19 +1,20 @@
 # mk-blogpoetry
 
-This project is a website build using GoogleCloud Platform Python
+This project is a website build using GoogleCloud Platform Python. It is blog poetry
 
 # Technologies
-  1. Python
-  2. App Engine
-  3. Html/css
+- Python
+- App Engine
+- Html/css
 
 # SetUp
-  1. Install Python
-  2. Install Google App Engine Launcher
+- Install Python
+- Install Google App Engine Launcher
   
 # Run Project
-  1. Clone this repo
-  2. <code>cd</code> to this repo
-  3. Run command <code>dev_appserver.py</code>
+- Clone this repo
+- Open the clone folder into Google App Engine Launcher
+- Select project and click the <code>Run</code> button
+- Visit the application on your browser at http://localhost:8080/
   
   
