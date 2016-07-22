@@ -98,6 +98,7 @@ class User(ndb.Model):
     username = ndb.StringProperty(required = True)
     email_address = ndb.StringProperty()
     passwd = ndb.StringProperty(required = True)
+    post_likes = ndb.KeyProperty(kind = 'Post', repeated =True )
     
 # class model to represent a blog
 class Post(ndb.Model):
@@ -122,10 +123,10 @@ class Home(Handler):
         params = dict()
         posts = Post.query().order(-Post.created)
         cookie = self.logged()
-        # self.response.out.write(cookie)
+       
         if cookie:
-            params['username'] = cookie.split('|')[0]         
-            # self.response.out.write(params['username']) 
+            params['username'] = cookie.split('|')[0]       
+            
         if not posts:
             self.render('blog.html', error = "No posts for the moment")
         else:   
@@ -220,14 +221,33 @@ class CommentPost(Handler):
         comment = self.request.get('content')
         key = ndb.Key(Post, int(post_id))
         post = key.get()
-        self.response.out.write(post)
-        self.response.out.write(comment)
+        
         if post and comment:
             new_comment = Comments(post_id = key, comment = comment, author = self.current_user().key)
             new_comment.put()            
         self.redirect('/blog/%s'% key.id())
         return
-        
+
+class EditComment(Handler):
+    def post(self, comment_id):
+        comment = self.request.get('content')
+        key = ndb.Key(Comments, int(comment_id)) 
+        post_comment = key.get()
+        if comment:
+            post_comment.comment = comment       
+            post_comment.put()
+        self.redirect('/blog/%s'% post_comment.post_id.id())
+        return
+
+class DeleteComment(Handler):
+    def get(self, comment_id):
+        key =ndb.Key(Comments, int(comment_id))
+        post_comment = key.get()
+        if post_comment.author == self.current_user().key:
+            post_comment.key.delete()
+        self.redirect('/blog/%s' % post_comment.post_id.id())
+        return
+
 class LikePost(Handler):
     def get(self, post_id):
         if not self.logged():
@@ -235,9 +255,14 @@ class LikePost(Handler):
             return 
         key = ndb.Key(Post, int(post_id))
         post = key.get()
-        if post and (post.author != self.current_user().key):
-            post.likes = post.likes+1
-            post.put()
+        current_user =self.current_user()
+        if post and (post.author != current_user.key):
+            if not key in current_user.post_likes:
+                post.likes = post.likes+1
+                post.put()
+                current_user.post_likes.append(key)
+                current_user.put()
+
         self.redirect('/blog')
         return
 
@@ -334,6 +359,8 @@ app = webapp2.WSGIApplication([
     ('/blog/edit/([0-9]+)',EditPost),
     ('/blog/like/([0-9]+)',LikePost),
     ('/blog/comment/([0-9]+)',CommentPost),
-    ('/blog/delete/([0-9]+)', DeletePost)
+    ('/blog/delete/([0-9]+)', DeletePost),
+    ('/blog/editcomment/([0-9]+)', EditComment),
+    ('/blog/delcomment/([0-9]+)', DeleteComment)
 
 ], debug=True)

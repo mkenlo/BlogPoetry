@@ -24,21 +24,37 @@
  </div>
  <br>
  <div class ="row">
-  <h4>So much comments...</h4>
+  <h3>So much comments...</h3>
   <div class="col-md-12">
     {% for comment in post_comments%}
-
-      <h5>{{comment.author.id()}}<small> said:</small> </h5>
+      <h4>{{comment.author.id()}}<small> said:</small> </h4>
       <blockquote>
         <p>{{comment.comment}}</p>
       </blockquote>
+      {% if username == comment.author.id() %}  
+        <div >  
+          <a title="click to edit comment" id="edit-comment-link" onclick="showEditComment()"> <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit </a>
+          <a href="/blog/delcomment/{{comment.key.id()}}" title="delete comment" onclick="deletePost()"> <span class="glyphicon glyphicon-remove"></span>&nbsp;Delete</a>
+         </div>
+         <br> 
+          <div id="edit-comment" class="col-md-6">
+            <form method="post" action="/blog/editcomment/{{comment.key.id()}}">
+              <textarea name="content" rows="5" cols="50" class="form-control">{{comment.comment}}</textarea><br>
+              <input type="submit" value="Save comment" class="btn btn-primary">
+            </form>  
+          </div>
+      {% endif %}
+      
     {% endfor %}
+
+
     {% if not post_comments%}
     <p> Not yet comments for this posts</p>
     {% endif %}
-  </div>
+</div>
 
  </div>
+ <br>
 <div class="row">
     <div class="col-md-4">
       {% if username != post.author.id()%}

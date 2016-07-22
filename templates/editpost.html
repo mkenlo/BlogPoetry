@@ -23,7 +23,7 @@
 		    <label>
 		    	<input id="submit" type="submit" class="btn btn-primary "> 
 		    	<a href="/blog/{{post.key.id()}}" role="button" class="btn btn-warning">Cancel</a>
-		    	<a href="/blog/delete/{{post.key.id()}}" role="button" class="btn btn-danger">Delete post</a>
+		    	<a href="/blog/delete/{{post.key.id()}}" role="button" class="btn btn-danger " onclick="deletePost()">Delete post</a>
 			</label>
 		</form>
 	</div>
