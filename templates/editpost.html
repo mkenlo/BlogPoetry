@@ -10,9 +10,8 @@
 		{% endif %}
 		
 		<form method="post" action="/blog/edit/{{post.key.id()}}" >
-			<input type="hidden" name="post-id" required  value="{{post.key.id()}}" >	
+			
 			<label>Title
-
 		      <input type="text" name="post-title" required  class="form-control" value="{{post.title}}" >
 		    </label>
 		   	<br>	    
